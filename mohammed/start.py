@@ -39,8 +39,16 @@ REACTIONS = [
 ]
 
 dev_text = "👨‍💻 Mind Behind This Bot:\n• @Mr_Mohammed_29\n• @Aero_Unity"
-dev_text = "👨‍💻 Developer: @Mr_Mohammed_29"
 channels_text = "📢 Channel: @Aero_Unity"
+
+expected_dev_hash = "PUT_DEV_HASH_HERE"
+expected_channels_hash = "PUT_CHANNEL_HASH_HERE"
+
+if (
+    hashlib.sha256(dev_text.encode("utf-8")).hexdigest() != expected_dev_hash
+    or hashlib.sha256(channels_text.encode("utf-8")).hexdigest() != expected_channels_hash
+):
+    raise Exception("Tampered developer info detected! Bot will not start.")
 
 class script(object):
 
@@ -179,9 +187,9 @@ def progress(current, total, message, type):
     if not hasattr(progress, "cache"):
         progress.cache = {}
 
-        now = time.time()
-        task_id = f"{message.id}{type}"
-        last_time = progress.cache.get(task_id, 0)
+    now = time.time()
+    task_id = f"{message.id}{type}"
+    last_time = progress.cache.get(task_id, 0)
 
     if not hasattr(progress, "start_time"):
         progress.start_time = {}
@@ -488,7 +496,7 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
     data = callback_query.data
     message = callback_query.message
     if not message: return
-   # --- DEVELOPER INFO ---
+   # --- DEVELOPER INFO --- #
     if data == "dev_info":
         await callback_query.answer(
             text=dev_text,
@@ -511,8 +519,7 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
             message_id=message.id,
             media=InputMediaPhoto(
                 media=SUBSCRIPTION,
-                caption=script.PREMIUM_TEXT.format(callback_query.from_user.mention, UPI_ID, QR_CODE)
-            ),
+                caption=script.PREMIUM_TEXT.format(UPI_ID, QR_CODE),
             reply_markup=InlineKeyboardMarkup(buttons)
         )
     elif data == "help_btn":
