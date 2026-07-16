@@ -38,16 +38,17 @@ REACTIONS = [
     "😡"
 ]
 
-dev_text = "👨‍💻 Mind Behind This Bot:\n• @Mr_Mohammed_29\n• @Anime_UpdatesAU"
-dev_text = "👨‍💻 Developer: @Mr_Mohammed_29"
-channels_text = "📢 Channel: @Anime_UpdatesAU"
+dev_text = "👨‍💻 Mind Behind This Bot:\n• @Mr_Mohammed_29\n• @Aero_Unity"
+channels_text = "📢 Channel: @Aero_Unity"
 
+expected_dev_hash = "PUT_DEV_HASH_HERE"
+expected_channels_hash = "PUT_CHANNEL_HASH_HERE"
 
 if (
-    hashlib.sha256(dev_text.encode('utf-8')).hexdigest() != expected_dev_hash or
-    hashlib.sha256(channels_text.encode('utf-8')).hexdigest() != expected_channels_hash
+    hashlib.sha256(dev_text.encode("utf-8")).hexdigest() != expected_dev_hash
+    or hashlib.sha256(channels_text.encode("utf-8")).hexdigest() != expected_channels_hash
 ):
-    raise Exception("Tampered developer info detected! Bot will not start. Fuck the code - crashing now.")
+    raise Exception("Tampered developer info detected! Bot will not start.")
 
 class script(object):
 
@@ -86,7 +87,7 @@ class script(object):
 <b>├⍟ 📚 Library : <a href='https://docs.pyrogram.org/'>Pyrogram Async</a></b>
 <b>├⍟ 🐍 Language : <a href='https://www.python.org/'>Python 3.11+</a></b>
 <b>├⍟ 🗄 Database : <a href='https://www.mongodb.com/'>MongoDB Atlas Cluster</a></b>
-<b>├⍟ 📡 Hosting : Dedicated High-Speed VPS</b>
+<b>├⍟ 📡 Hosting : Render</b>
 <b>╰───────────────⍟</b></blockquote>
 """
     PREMIUM_TEXT = """<b>💎 Premium Membership Plans</b>
@@ -495,7 +496,7 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
     data = callback_query.data
     message = callback_query.message
     if not message: return
-   # --- DEVELOPER INFO ---
+   # --- DEVELOPER INFO --- #
     if data == "dev_info":
         await callback_query.answer(
             text=dev_text,
@@ -518,8 +519,7 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
             message_id=message.id,
             media=InputMediaPhoto(
                 media=SUBSCRIPTION,
-                caption=script.PREMIUM_TEXT.format(callback_query.from_user.mention, UPI_ID, QR_CODE)
-            ),
+                caption=script.PREMIUM_TEXT.format(UPI_ID, QR_CODE),
             reply_markup=InlineKeyboardMarkup(buttons)
         )
     elif data == "help_btn":
