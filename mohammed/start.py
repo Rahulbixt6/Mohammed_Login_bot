@@ -511,8 +511,8 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
         await settings_panel(client, callback_query)
     elif data == "buy_premium":
         buttons = [
-            [InlineKeyboardButton("📸 Send Payment Proof", url="https://t.me/Mr_Mohammed_29")],
-            [InlineKeyboardButton("⬅️ Back to Home", callback_data="start_btn")]
+            [InlineKeyboardButton("ðŸ“¸ Send Payment Proof", url="https://t.me/Mr_Mohammed_29")],
+            [InlineKeyboardButton("â¬…ï¸ Back to Home", callback_data="start_btn")]
         ]
         await client.edit_message_media(
             chat_id=message.chat.id,
@@ -520,10 +520,11 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
             media=InputMediaPhoto(
                 media=SUBSCRIPTION,
                 caption=script.PREMIUM_TEXT.format(UPI_ID, QR_CODE),
+            ),
             reply_markup=InlineKeyboardMarkup(buttons)
         )
     elif data == "help_btn":
-        buttons = [[InlineKeyboardButton("⬅️ Back to Home", callback_data="start_btn")]]
+        buttons = [[InlineKeyboardButton("â¬…ï¸ Back to Home", callback_data="start_btn")]]
         await client.edit_message_caption(
             chat_id=message.chat.id,
             message_id=message.id,
@@ -533,7 +534,7 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
         )
 
     elif data == "about_btn":
-        buttons = [[InlineKeyboardButton("⬅️ Back to Home", callback_data="start_btn")]]
+        buttons = [[InlineKeyboardButton("â¬…ï¸ Back to Home", callback_data="start_btn")]]
         await client.edit_message_caption(
             chat_id=message.chat.id,
             message_id=message.id,
@@ -554,16 +555,16 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
             photo_url = "https://graph.org/file/0e77ba48a8b7a3b09296f-362372bee0d84fd217.jpg"
         buttons = [
             [
-                InlineKeyboardButton("💎 Buy Premium", callback_data="buy_premium"),
-                InlineKeyboardButton("🆘 Help & Guide", callback_data="help_btn")
+                InlineKeyboardButton("ðŸ’Ž Buy Premium", callback_data="buy_premium"),
+                InlineKeyboardButton("ðŸ†˜ Help & Guide", callback_data="help_btn")
             ],
             [
-                InlineKeyboardButton("⚙️ Settings Panel", callback_data="settings_btn"),
-                InlineKeyboardButton("ℹ️ About Bot", callback_data="about_btn")
+                InlineKeyboardButton("âš™ï¸ Settings Panel", callback_data="settings_btn"),
+                InlineKeyboardButton("â„¹ï¸ About Bot", callback_data="about_btn")
             ],
             [
-                InlineKeyboardButton('📢 Channels', callback_data="channels_info"),
-                InlineKeyboardButton('👨‍💻 Developers', callback_data="dev_info")
+                InlineKeyboardButton('ðŸ“¢ Channels', callback_data="channels_info"),
+                InlineKeyboardButton('ðŸ‘¨â€ðŸ’» Developers', callback_data="dev_info")
             ]
         ]
         await client.edit_message_media(
@@ -580,8 +581,3 @@ async def button_callbacks(client: Client, callback_query: CallbackQuery):
     elif data in ["cmd_list_btn", "user_stats_btn", "dump_chat_btn", "thumb_btn", "caption_btn"]:
         pass
     await callback_query.answer()
-
-#Don't Remove Credits 
-#Supports Group @AU_Bot_Discussion 
-#Telegram Channel @Anime_UpdatesAU
-#Developer @Mr_Mohammed_29
